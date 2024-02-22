@@ -37,7 +37,7 @@ public class ConsultaProyectos {
             xqs.setProperty("indent", "yes");
 
             // Consulta para obtener los proyectos
-            ResourceSet resultProyectos = xqs.query("let $proyectos := doc(\"coleccionXML/proyectosFP.xml\")//Row\n" +
+            ResourceSet resultProyectos = xqs.query("let $proyectos := doc('coleccionXML/proyectosFP.xml')//Row\n" +
                     "return <proyectos>{\n" +
                     "    for $x in $proyectos\n" +
                     "    return\n" +

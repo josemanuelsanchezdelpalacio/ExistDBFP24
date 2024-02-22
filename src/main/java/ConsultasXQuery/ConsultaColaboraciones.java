@@ -36,7 +36,18 @@ public class ConsultaColaboraciones {
             xqs.setProperty("indent", "yes");
 
             // Consulta para obtener los proyectos
-            ResourceSet resultProyectos = xqs.query("");
+            ResourceSet resultProyectos = xqs.query("let $centros := doc('coleccionXML/centros.xml')//centros\n" +
+                    "let $proyectos := doc('coleccionXML/proyectosFP.xml')//Row\n" +
+                    "let $familias := doc('coleccionXML/familias.xml')//option\n" +
+                    "\n" +
+                    "for $centro in $centros, $proyecto in $proyectos, $familia in $familias\n" +
+                    "return\n" +
+                    "   <colaboraciones>\n" +
+                    "       <IdProject>{data($proyecto/@index)}</IdProject>\n" +
+                    "       <IdUser>{data($centro/codigo)}</IdUser>\n" +
+                    "       <IdFamily>{data($familia/@value)}</IdFamily>\n" +
+                    "       <IsManager></IsManager>" +
+                    "   </colaboraciones>");
 
             // Obtener los resultados
             ResourceIterator i = resultProyectos.getIterator();
