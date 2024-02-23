@@ -44,8 +44,8 @@ public class ConsultaProyectos {
                     "    <Proyecto>\n" +
                     "        <centroCoordinador>{$x/CENTROCOORDINADOR/data()}</centroCoordinador>\n" +
                     "        <tituloProyecto>{$x/TÍTULODELPROYECTO/data()}</tituloProyecto>\n" +
-                    "        <fechaInicio>{$x/AUTORIZACIÓN/data()}</fechaInicio>\n" +
-                    "        <fechaFin>{$x/CONTINUIDAD/data()}</fechaFin>\n" +
+                    "        <fechaInicio>{$x/fn:substring-after(AUTORIZACIÓN, 'Resolución ')}</fechaInicio>\n" +
+                    "        <fechaFin>{$x/fn:substring-after(CONTINUIDAD, 'Resolución ')}</fechaFin>\n" +
                     "        <coordinacion>{$x/COORDINACIÓN/data()}</coordinacion>\n" +
                     "        <contacto>{$x/CONTACTO/data()}</contacto>\n" +
                     "        <centroanexionado>{$x/CENTROSANEXIONADOS/data()}</centroanexionado>\n" +

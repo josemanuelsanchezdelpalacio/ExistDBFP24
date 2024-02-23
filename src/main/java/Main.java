@@ -48,14 +48,14 @@ public class Main {
                     ConsultaCentros.listarCentros();
                     ConsultaProyectos.listarProyectos();
                     ConsultaFamilias.listarFamilias();
-                    ConsultaColaboraciones.listarColaboraciones();
+                    //ConsultaColaboraciones.listarColaboraciones();
                 }
                 case 5 -> {
                     //insertar los datos a las tablas
                     InsertarCentros.insertar();
                     InsertarFamilias.insertar();
                     InsertarProyectos.insertar();
-                    InsertarColaboraciones.insertar();
+                    //InsertarColaboraciones.insertar();
                 }
                 case 0 -> salir = true;
                 default -> System.out.println("Opcion no valida");
