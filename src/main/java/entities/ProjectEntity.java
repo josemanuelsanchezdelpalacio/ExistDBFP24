@@ -100,12 +100,20 @@ public class ProjectEntity {
         return initDate;
     }
 
+    public void setInitDate(java.sql.Date initDate) {
+        this.initDate = initDate;
+    }
+
     public void setInitDate(Date initDate) {
         this.initDate = initDate;
     }
 
     public Date getEndDate() {
         return endDate;
+    }
+
+    public void setEndDate(java.sql.Date endDate) {
+        this.endDate = endDate;
     }
 
     public void setEndDate(Date endDate) {

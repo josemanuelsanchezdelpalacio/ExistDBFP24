@@ -5,5 +5,19 @@
              version="3.0">
   <persistence-unit name="default">
 
+    <class>entities.CollaborationEntity</class>
+    <class>entities.EntityEntity</class>
+    <class>entities.FamilyEntity</class>
+    <class>entities.FavouriteEntity</class>
+    <class>entities.ImplementEntity</class>
+    <class>entities.ProjectEntity</class>
+    <class>entities.TechnologyEntity</class>
+    <class>entities.UsersEntity</class>
+    <properties>
+      <property name="hibernate.connection.url" value="jdbc:mysql://54.37.220.4:3306/FP24MJO"/>
+      <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="hibernate.connection.username" value="MNJMSOG24"/>
+      <property name="hibernate.connection.password" value="G-UMg2[fdFk18o"/>
+    </properties>
   </persistence-unit>
 </persistence>

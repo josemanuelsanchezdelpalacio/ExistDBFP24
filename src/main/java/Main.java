@@ -10,6 +10,7 @@ import DatosXMLaBD.InsertarFamilias;
 import DatosXMLaBD.InsertarProyectos;
 import ManejoDB.CreacionTablas;
 import XML_a_ExistDB.SubirArchivosExistDB;
+import colaboraciones.XMLColaboraciones;
 import libs.Leer;
 
 public class Main {
@@ -48,14 +49,14 @@ public class Main {
                     ConsultaCentros.listarCentros();
                     ConsultaProyectos.listarProyectos();
                     ConsultaFamilias.listarFamilias();
-                    //ConsultaColaboraciones.listarColaboraciones();
                 }
                 case 5 -> {
                     //insertar los datos a las tablas
                     InsertarCentros.insertar();
                     InsertarFamilias.insertar();
                     InsertarProyectos.insertar();
-                    //InsertarColaboraciones.insertar();
+                    XMLColaboraciones.procesarXML();
+
                 }
                 case 0 -> salir = true;
                 default -> System.out.println("Opcion no valida");
