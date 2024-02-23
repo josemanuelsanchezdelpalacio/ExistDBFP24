@@ -42,10 +42,10 @@ public class ConsultaCentros {
                     "    where not(empty($centro/codigo)) and not(empty($centro/nombre)) and not(empty($centro/correoElectronico)) and not(empty($centro/codigoPostal))\n" +
                     "    return\n" +
                     "    <entidad>\n" +
-                    "        <codigo>{distinct-values($centro/codigo/text())}</codigo>\n" +
-                    "        <nombre>{$centro/nombre/text()}</nombre>\n" +
-                    "        <correoElectronico>{$centro/correoElectronico/text()}</correoElectronico>\n" +
-                    "        <web>{$centro/codigoPostal/text()}</web>\n" +
+                    "        <codigo>{if (empty($centro/codigo/text())) then 'CodigoNoDisponible' else distinct-values($centro/codigo/text())}</codigo>\n" +
+                    "        <nombre>{if (empty($centro/nombre/text())) then 'NombreNoDisponible' else $centro/nombre/text()}</nombre>\n" +
+                    "        <correoElectronico>{if (empty($centro/correoElectronico/text())) then 'CorreoNoDisponible' else $centro/correoElectronico/text()}</correoElectronico>\n" +
+                    "        <web>{if (empty($centro/codigoPostal/text())) then 'WebNoDisponible' else $centro/codigoPostal/text()}</web>\n" +
                     "    </entidad>\n" +
                     "}\n" +
                     "</entidades>\n");
