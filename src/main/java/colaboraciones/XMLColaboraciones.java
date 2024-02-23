@@ -4,8 +4,6 @@ package colaboraciones;
 import conexiones.ConexionMySQL;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.Unmarshaller;
-import objetosCSV.Proyectos;
-import objetosCSV.Proyecto;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;

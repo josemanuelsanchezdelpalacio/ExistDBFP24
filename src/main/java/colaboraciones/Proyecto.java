@@ -2,10 +2,12 @@ package colaboraciones;
 
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 import java.util.Date;
 
 @XmlRootElement(name = "Proyecto")
+@XmlType(propOrder = {"centroCoordinador", "tituloProyecto", "fechaInicio", "fechaFin", "coordinacion", "contacto", "centroanexionado"})
 public class Proyecto {
 
     private String centroCoordinador, tituloProyecto, coordinacion, contacto, centroAnexionado;
