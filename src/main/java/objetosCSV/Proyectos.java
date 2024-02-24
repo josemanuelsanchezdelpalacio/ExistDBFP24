@@ -10,10 +10,6 @@ public class Proyectos {
 
     public Proyectos() {}
 
-    public ArrayList<Proyecto> getProyectos() {
-        return proyectos;
-    }
-
     public void setProyectos(ArrayList<Proyecto> proyectos) {
         this.proyectos = proyectos;
     }

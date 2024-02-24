@@ -1,6 +1,11 @@
 package DatosXMLaBD;
 
 import conexiones.ConexionMySQL;
+import entities.EntityEntity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -17,7 +22,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class InsertarCentros {
-
 
     public static void insertar() {
         PreparedStatement ps;
@@ -53,12 +57,9 @@ public class InsertarCentros {
                 ps.executeUpdate();
             }
             System.out.println("Datos de ENTITY subidos");
-        } catch (ParserConfigurationException | IOException | SAXException e) {
-            System.err.println("Error: " + e.getMessage());
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (ParserConfigurationException | IOException | SAXException | SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error en la operación de la base de datos");
         }
     }
-
 }

@@ -1,16 +1,13 @@
 import CSVtoXML.LeerCSV_Centros;
 import CSVtoXML.LeerCSV_Proyectos;
 import ConsultasXQuery.ConsultaCentros;
-import ConsultasXQuery.ConsultaColaboraciones;
 import ConsultasXQuery.ConsultaFamilias;
 import ConsultasXQuery.ConsultaProyectos;
 import DatosXMLaBD.InsertarCentros;
-import DatosXMLaBD.InsertarColaboraciones;
 import DatosXMLaBD.InsertarFamilias;
 import DatosXMLaBD.InsertarProyectos;
 import ManejoDB.CreacionTablas;
 import XML_a_ExistDB.SubirArchivosExistDB;
-import colaboraciones.XMLColaboraciones;
 import libs.Leer;
 
 public class Main {
@@ -55,7 +52,6 @@ public class Main {
                     InsertarCentros.insertar();
                     InsertarFamilias.insertar();
                     InsertarProyectos.insertar();
-                    XMLColaboraciones.procesarXML();
 
                 }
                 case 0 -> salir = true;

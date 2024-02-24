@@ -33,7 +33,6 @@ public class ProjectEntity {
     @Basic
     @Column(name = "EndDate")
     private Date endDate;
-
     public ProjectEntity( String title, int logo, String web, String projectDescription, String state, Date initDate, Date endDate) {
         this.title = title;
         this.logo = logo;

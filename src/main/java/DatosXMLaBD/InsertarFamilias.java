@@ -1,6 +1,11 @@
 package DatosXMLaBD;
 
 import conexiones.ConexionMySQL;
+import entities.FamilyEntity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;

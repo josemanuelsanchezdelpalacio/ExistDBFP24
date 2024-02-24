@@ -13,6 +13,10 @@ public class CreacionTablas {
         //Creamos las tablas
         try (Connection con = ConexionMySQL.conectar("FP24MJO")) {
             try (Statement stmt = con.createStatement()) {
+
+                //para rehacer las tablas
+                stmt.execute("DROP TABLE IF EXISTS FAVOURITE, IMPLEMENT, COLLABORATION, TECHNOLOGY, USERS, ENTITY, PROJECT, FAMILY");
+
                 try {
                     //Borramos la tabla si existe
                     stmt.execute("DROP TABLE IF EXISTS FAMILY");

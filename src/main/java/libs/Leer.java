@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Leer {
 
@@ -139,31 +138,6 @@ public class Leer {
                 System.out.println("Introduce la fecha en el formato indicado (" + formato + ").");
             }
         }
-    }
-
-    //COGER DATE SQL
-    static public java.sql.Date pedirFechaSQL(final String texto){
-        java.sql.Date dateSql = null;
-        Scanner sc = new Scanner(System.in);
-        boolean error = true;
-        while(error) {
-            try {
-                mostrarEnPantalla(texto);
-                dateSql = java.sql.Date.valueOf(sc.next());
-                String formatoEsperado = "yyyy-MM-dd";
-                SimpleDateFormat sdf = new SimpleDateFormat(formatoEsperado);
-                String fechaFormateada = sdf.format(dateSql);
-                if (fechaFormateada.equals(dateSql.toString())) {
-                    System.out.println("La fecha tiene el formato correcto: " + fechaFormateada);
-                    error = false;
-                } else {
-                    System.out.println("La fecha no tiene el formato correcto.");
-                }
-            } catch (Exception e) {
-                System.out.println("Formato Incorrecto");
-            }
-        }
-        return dateSql;
     }
 
     public static char pedirChar(String texto) {

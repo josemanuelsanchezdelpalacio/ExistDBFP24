@@ -1,9 +1,15 @@
 package DatosXMLaBD;
 
 import conexiones.ConexionMySQL;
+import entities.ProjectEntity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,6 +22,8 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class InsertarProyectos {
 
@@ -85,7 +93,7 @@ public class InsertarProyectos {
             // Cerrar la conexión a la base de datos
             con.close();
 
-        } catch (ParserConfigurationException | IOException | org.xml.sax.SAXException | SQLException e) {
+        } catch (ParserConfigurationException | IOException | SAXException | SQLException e) {
             e.printStackTrace();
             System.out.println("Error en la operación de la base de datos");
         }
