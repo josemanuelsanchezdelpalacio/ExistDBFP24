@@ -29,9 +29,7 @@ public class ConsultaCentros {
             database.setProperty("create-database", "true");
             DatabaseManager.registerDatabase(database);
 
-            Collection col = null;
             //obtengo la coleccion
-            col = DatabaseManager.getCollection("xmldb:exist://localhost:8080/exist/xmlrpc/db/");
             XPathQueryService xqs = (XPathQueryService) col.getService("XQueryService", "3.0");
             xqs.setProperty("indent", "yes");
 

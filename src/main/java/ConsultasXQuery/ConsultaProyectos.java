@@ -29,10 +29,7 @@ public class ConsultaProyectos {
             database.setProperty("create-database", "true");
             DatabaseManager.registerDatabase(database);
 
-            Collection col = null;
             // Obtener la colección
-
-            col = DatabaseManager.getCollection("xmldb:exist://localhost:8080/exist/xmlrpc/db/");
             XQueryService xqs = (XQueryService) col.getService("XQueryService", "1.0");
             xqs.setProperty("indent", "yes");
 

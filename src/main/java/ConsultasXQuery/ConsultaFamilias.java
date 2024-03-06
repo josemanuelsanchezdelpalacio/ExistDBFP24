@@ -1,5 +1,6 @@
 package ConsultasXQuery;
 
+import conexiones.ConexionExistDB;
 import org.xmldb.api.DatabaseManager;
 import org.xmldb.api.base.*;
 import org.xmldb.api.modules.XQueryService;
@@ -17,6 +18,8 @@ import static ConsultasXQuery.ConsultaCentros.col;
 
 public class ConsultaFamilias {
 
+    static Collection col = ConexionExistDB.conexionExistDb();
+
     public static void listarFamilias() {
         final String driver = "org.exist.xmldb.DatabaseImpl";
 
@@ -29,9 +32,7 @@ public class ConsultaFamilias {
             database.setProperty("create-database", "true");
             DatabaseManager.registerDatabase(database);
 
-            Collection col = null;
             //obtengo la coleccion
-            col = DatabaseManager.getCollection("xmldb:exist://localhost:8080/exist/xmlrpc/db/");
             XQueryService xqs = (XQueryService) col.getService("XQueryService", "1.0");
             xqs.setProperty("indent", "yes");
 
