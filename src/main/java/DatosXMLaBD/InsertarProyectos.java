@@ -93,21 +93,21 @@ public class InsertarProyectos {
                     SimpleDateFormat sdfOutput = new SimpleDateFormat("yyyy-MM-dd");
 
                     if (!fechaInicio.isEmpty()) {
-                        java.util.Date parsedDate = sdfInput.parse(fechaInicio);
+                        Date parsedDate = sdfInput.parse(fechaInicio);
                         pstmt.setString(3, sdfOutput.format(parsedDate));
                     } else {
                         pstmt.setNull(3, Types.DATE);
                     }
 
                     if (!fechaFin.isEmpty()) {
-                        java.util.Date parsedDate = sdfInput.parse(fechaFin);
+                        Date parsedDate = sdfInput.parse(fechaFin);
                         pstmt.setString(4, sdfOutput.format(parsedDate));
                     } else {
                         pstmt.setNull(4, Types.DATE);
                     }
                     pstmt.executeUpdate();
 
-                    // Insertar una colaboración asociada al proyecto
+                    // Obtener el ID del proyecto recién insertado
                     ResultSet generatedKeys = pstmt.getGeneratedKeys();
                     int projectId = -1;
                     if (generatedKeys.next()) {
@@ -138,3 +138,4 @@ public class InsertarProyectos {
         }
     }
 }
+
