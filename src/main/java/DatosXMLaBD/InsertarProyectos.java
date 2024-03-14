@@ -87,8 +87,8 @@ public class InsertarProyectos {
                         String insertCollaborationQuery = "INSERT INTO COLLABORATION (IdProject, IdUser, IdFamily, IsManager) VALUES (?, ?, ?, ?)";
                         PreparedStatement collaborationPstmt = con.prepareStatement(insertCollaborationQuery);
                         collaborationPstmt.setInt(1, projectId);
-                        collaborationPstmt.setNull(2, Types.INTEGER);
-                        collaborationPstmt.setNull(3, Types.INTEGER);
+                        collaborationPstmt.setInt(2, -1);
+                        collaborationPstmt.setInt(3, -1);
                         collaborationPstmt.setBoolean(4, true);
                         collaborationPstmt.executeUpdate();
                     }
