@@ -16,20 +16,16 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Types;
+import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 public class InsertarProyectos {
-
     public static void insertar() {
         try {
-            // Crear la conexión a la base de datos MySQL
+            //creo la conexión a la base de datos MySQL
             Connection con = ConexionMySQL.conectar("FP24MJO");
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -38,32 +34,29 @@ public class InsertarProyectos {
             Document document = builder.parse(p.toFile());
 
             NodeList nodeList = document.getElementsByTagName("Proyecto");
-
-            // Creación de los objetos de la entidad Proyecto
+            //creo los objetos de la entidad Proyecto
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Element element = (Element) nodeList.item(i);
-
                 String titulo = element.getElementsByTagName("tituloProyecto").item(0).getTextContent();
                 String fechaInicio = element.getElementsByTagName("fechaInicio").item(0).getTextContent();
                 String fechaFin = element.getElementsByTagName("fechaFin").item(0).getTextContent();
+                String estado = "Pendiente";
 
-                String estado = "Pendiente"; // Por defecto, el estado es Pendiente
-
-                // Verificar el estado según las fechas disponibles
+                //compruebo el estado segun las fechas disponibles
                 if (!fechaInicio.isEmpty() && !fechaFin.isEmpty()) {
                     estado = "Completado";
                 } else if (!fechaInicio.isEmpty()) {
                     estado = "En Curso";
                 }
 
-                // Usar la conexión a la base de datos MySQL
+                //inserto los datos
                 try {
                     String query = "INSERT IGNORE INTO PROJECT (Title, State, InitDate, EndDate) VALUES (?, ?, ?, ?)";
-                    PreparedStatement pstmt = con.prepareStatement(query);
+                    PreparedStatement pstmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                     pstmt.setString(1, titulo);
                     pstmt.setString(2, estado);
 
-                    // Reformatear fecha de inicio
+                    //modifico las fechas para formatearlas
                     if (!fechaInicio.isEmpty()) {
                         SimpleDateFormat sdfInput = new SimpleDateFormat("dd/MM/yyyy");
                         SimpleDateFormat sdfOutput = new SimpleDateFormat("yyyy-MM-dd");
@@ -72,8 +65,6 @@ public class InsertarProyectos {
                     } else {
                         pstmt.setNull(3, Types.DATE);
                     }
-
-                    // Reformatear fecha de fin
                     if (!fechaFin.isEmpty()) {
                         SimpleDateFormat sdfInput = new SimpleDateFormat("dd/MM/yyyy");
                         SimpleDateFormat sdfOutput = new SimpleDateFormat("yyyy-MM-dd");
@@ -82,20 +73,31 @@ public class InsertarProyectos {
                     } else {
                         pstmt.setNull(4, Types.DATE);
                     }
-
                     pstmt.executeUpdate();
+
+                    //obtengo el ID del proyecto recién insertado
+                    ResultSet generatedKeys = pstmt.getGeneratedKeys();
+                    int projectId = -1;
+                    if (generatedKeys.next()) {
+                        projectId = generatedKeys.getInt(1);
+                    }
+
+                    //insercion de una colaboración asociada al proyecto
+                    if (projectId != -1) {
+                        String insertCollaborationQuery = "INSERT INTO COLLABORATION (IdProject, IdUser, IdFamily, IsManager) VALUES (?, ?, ?, ?)";
+                        PreparedStatement collaborationPstmt = con.prepareStatement(insertCollaborationQuery);
+                        collaborationPstmt.setInt(1, projectId);
+                        collaborationPstmt.setNull(2, Types.INTEGER);
+                        collaborationPstmt.setNull(3, Types.INTEGER);
+                        collaborationPstmt.setBoolean(4, true);
+                        collaborationPstmt.executeUpdate();
+                    }
                 } catch (SQLException | ParseException e) {
                     e.printStackTrace();
-                    System.out.println("Error en la operación de la base de datos");
                 }
             }
-            System.out.println("Datos de PROJECT subidos");
-            // Cerrar la conexión a la base de datos
-            con.close();
-
-        } catch (ParserConfigurationException | IOException | SAXException | SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error en la operación de la base de datos");
         }
     }
 }
