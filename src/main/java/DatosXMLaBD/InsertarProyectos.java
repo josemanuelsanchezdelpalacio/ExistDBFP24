@@ -92,6 +92,7 @@ public class InsertarProyectos {
                     SimpleDateFormat sdfInput = new SimpleDateFormat("dd/MM/yyyy");
                     SimpleDateFormat sdfOutput = new SimpleDateFormat("yyyy-MM-dd");
 
+                    //formateo las fechas
                     if (!fechaInicio.isEmpty()) {
                         Date parsedDate = sdfInput.parse(fechaInicio);
                         pstmt.setString(3, sdfOutput.format(parsedDate));
@@ -107,7 +108,7 @@ public class InsertarProyectos {
                     }
                     pstmt.executeUpdate();
 
-                    // Obtener el ID del proyecto recién insertado
+                    //obtengo el ID del proyecto recien insertado
                     ResultSet generatedKeys = pstmt.getGeneratedKeys();
                     int projectId = -1;
                     if (generatedKeys.next()) {
@@ -115,7 +116,7 @@ public class InsertarProyectos {
                     }
 
                     if (projectId != -1) {
-                        // Insertar colaboración con campos de usuario y familia nulos
+                        //inserto colaboracion con campos de usuario y familia nulos
                         String insertCollaborationQuery = "INSERT INTO COLLABORATION (IdProject, IdUser, IdFamily, IsManager) VALUES (?, NULL, NULL, ?)";
                         PreparedStatement collaborationPstmt = con.prepareStatement(insertCollaborationQuery);
                         collaborationPstmt.setInt(1, projectId);
